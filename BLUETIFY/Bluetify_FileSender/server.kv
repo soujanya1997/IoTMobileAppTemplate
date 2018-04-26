@@ -1,0 +1,81 @@
+#: import main server
+#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+#: import ListItemButton kivy.uix.listview.ListItemButton
+
+<ListItemButton>:
+    selected_color: 0, 1, 1, 1
+    deselected_color: 1, 1, 1, 1
+
+
+
+<RootWidget>:
+	student_list: students_list_view
+	label: label
+	height: 400.0
+# this is the rule for your root widget, defining it's look and feel.
+
+
+	BoxLayout:
+		padding: [20,20]
+		spacing: [20,20]
+
+		BoxLayout:
+			padding: [20,20]
+			spacing: [20,20]
+			orientation: "vertical"
+			
+			ActionBar:
+
+				ActionView:
+					use_separator: True
+					ActionPrevious:
+						title: 'SELECT FILE'
+						with_previous: False
+
+			FileChooserIconView:
+				id: filechooser
+				height: 100.0	
+				on_selection: root.fileSelected(filechooser.path, filechooser.selection)
+			Label:
+				id: label
+				size_hint_y: 0.1
+				text: "SELECTED FILE"
+
+		BoxLayout:
+			padding: [20,20]
+			spacing: [20,20]
+			orientation: "vertical"
+			ActionBar:
+
+				ActionView:
+					use_separator: True
+					ActionPrevious:
+						title: 'Bluetooth devices found:'
+						with_previous: False
+
+
+			BoxLayout:
+				
+				orientation: "vertical"
+				ListView:
+					id: students_list_view
+					adapter:
+						
+						ListAdapter(data=root.getList(),cls=main.StudentListButton)
+					
+				BoxLayout:
+					orientation: "vertical"
+					BoxLayout:
+						Button:
+							text: "SELECT FILE"
+							on_press: root.getFile()
+						Button:
+							text: "SELECT DEVICE"
+							on_press: root.getDeviceName()
+					Button:
+						text: "SEND"
+						on_press: root.sendFile()
+					Button:
+						text: "REFRESH"
+						on_press: root.refreshList()
+		

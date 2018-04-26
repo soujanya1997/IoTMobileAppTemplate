@@ -1,0 +1,71 @@
+#: import main Main
+#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+#:import ListItemButton kivy.uix.listview.ListItemButton
+
+
+<RootWidget>:
+	height: 400.0
+# this is the rule for your root widget, defining it's look and feel.
+
+
+	BoxLayout:
+		padding: [20,20]
+		spacing: [20,20]
+
+		BoxLayout:
+			padding: [20,20]
+			spacing: [20,20]
+			orientation: "vertical"
+			
+			ActionBar:
+
+				ActionView:
+					use_separator: True
+					ActionPrevious:
+						title: 'Select File'
+						with_previous: False
+
+			FileChooserIconView:
+				height: 100.0	
+
+			ActionBar:
+
+				ActionView:
+					use_separator: True
+					ActionPrevious:
+						title: 'Selected File'
+						with_previous: False
+
+		
+					
+
+		BoxLayout:
+			padding: [20,20]
+			spacing: [20,20]
+			orientation: "vertical"
+			ActionBar:
+
+				ActionView:
+					use_separator: True
+					ActionPrevious:
+						title: 'Bluetooth devices found:'
+						with_previous: False
+
+
+			BoxLayout:
+				orientation: "vertical"
+				ListView:
+					adapter:
+						ListAdapter(data=["Soujanya"],cls=main.StudentListButton)
+				BoxLayout:
+					orientation: "vertical"
+					Label:
+						text: "SELECTED DEVICE"
+					Button:
+						text: "SELECT DEVICE"
+					Button:
+						text: "SEND"
+		
+
+        
+
